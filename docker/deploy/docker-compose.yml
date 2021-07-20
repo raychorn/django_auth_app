@@ -12,7 +12,7 @@ services:
     ports:
       - 8888:80
       - 19000:9000
-    command: ["/workspaces/runserver.sh"]
+    command: ["/workspaces/auth_site/runserver.sh"]
     entrypoint:
       - /bin/bash
     tty: true
