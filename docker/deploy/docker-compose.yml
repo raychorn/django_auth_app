@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  docker_agent:
+    image: desktop-tcghl6h:5000/ubuntu_nginx_focal_all_pythons:latest-clean-3.9.6
+    container_name: docker_agent
+    environment:
+      - TZ=America/Denver
+    volumes:
+      - ./etc/nginx:/etc/nginx
+      - ../..:/workspaces/auth_site
+    ports:
+      - 8888:80
+      - 19000:9000
+    command: ["/workspaces/runserver.sh"]
+    entrypoint:
+      - /bin/bash
+    tty: true
+    stdin_open: true      
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+    logging:
+      options:
+          max-size: 1g        
+    restart: unless-stopped
